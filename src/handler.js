@@ -1,4 +1,3 @@
-// src/handler.js
 const { nanoid } = require('nanoid');
 const books = require('./books');
 
