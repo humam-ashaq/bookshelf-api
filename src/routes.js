@@ -1,3 +1,4 @@
+const express = require('express');
 const {
   addBookHandler,
   getAllBooksHandler,
@@ -6,37 +7,22 @@ const {
   deleteBookByIdHandler,
 } = require('./handler');
 
-const routes = [
-  // Route untuk menyimpan buku
-  {
-    method: 'POST',
-    path: '/books',
-    handler: addBookHandler,
-  },
-  // Route untuk menampilkan seluruh buku
-  {
-    method: 'GET',
-    path: '/books',
-    handler: getAllBooksHandler,
-  },
-  // Route untuk menampilkan detail buku
-  {
-    method: 'GET',
-    path: '/books/{bookId}',
-    handler: getBookByIdHandler,
-  },
-  // Route untuk mengubah data buku
-  {
-    method: 'PUT',
-    path: '/books/{bookId}',
-    handler: editBookByIdHandler,
-  },
-  // Route untuk menghapus buku
-  {
-    method: 'DELETE',
-    path: '/books/{bookId}',
-    handler: deleteBookByIdHandler,
-  },
-];
+const router = express.Router();
 
-module.exports = routes;
+// Rute untuk menambah buku
+router.post('/books', addBookHandler);
+
+// Rute untuk mendapatkan semua buku (termasuk query opsional)
+router.get('/books', getAllBooksHandler);
+
+// Rute untuk mendapatkan detail buku berdasarkan ID
+router.get('/books/:bookId', getBookByIdHandler);
+
+// Rute untuk mengubah data buku berdasarkan ID
+router.put('/books/:bookId', editBookByIdHandler);
+
+// Rute untuk menghapus buku berdasarkan ID
+router.delete('/books/:bookId', deleteBookByIdHandler);
+
+
+module.exports = router;
